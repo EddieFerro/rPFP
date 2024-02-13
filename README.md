@@ -2,8 +2,6 @@
 
 This repository is the current and maintained version of Recursive PFP from https://github.com/marco-oliva/r-pfbwt. That repository is now depreceated. Any issues should be posted here.
 
-[![CMake](https://github.com/EddieFerro/rPFP/actions/workflows/cmake.yml/badge.svg)](https://github.com/EddieFerro/rPFP/actions/workflows/cmake.yml)
-
 `rPFP` is a tool to build the run-length encoded *BWT* and the *SA* values at the run heads from the prefix-free 
 parsing of the input data.
 
