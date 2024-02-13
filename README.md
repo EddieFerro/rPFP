@@ -32,7 +32,7 @@ make -j
  
 ## How to use `rPFP`
 `rPFP` takes as input the prefix-free parse of the input data, namely a dictionary *D<sub>1</sub>* and a parse *P<sub>1</sub>*, and 
-the dictionary *D<sub>2</sub>* and the parse *P<sub>2</sub>* obtained by prefix-free parsing *P<sub>1</sub>*. Note that `r-pfbwt` does not use *P<sub>1</sub>*,
+the dictionary *D<sub>2</sub>* and the parse *P<sub>2</sub>* obtained by prefix-free parsing *P<sub>1</sub>*. Note that `rPFP` does not use *P<sub>1</sub>*,
 it only uses *D<sub>1</sub>*, *D<sub>2</sub>* and *P<sub>2</sub>*. In order to compute the prefix-free parsing of the input data we can use `pfp++`
 ([link here](https://github.com/marco-oliva/pfp.git)). The following example computes the run-length encoded *BWT* of multiple
 sequences of yeast.
