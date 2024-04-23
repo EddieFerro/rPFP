@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     app.add_option("--chunks", chunks, "Number of chunks.")->configurable()->check(CLI::Range(1,1000));
     app.add_option("--integer-shift", int_shift, "Integer shift used during parsing.")->configurable();
     app.add_option("--tmp-dir", tmp_dir, "Temporary files directory.")->check(CLI::ExistingDirectory)->configurable();
-    app.add_flag("--bwt-only", bwt_only, "Only compute the RLBWT. No SA values.")->configurable();
+    app.add_flag("--bwt-only", bwt_only, "Only compute the RLBWT. No SA or LCP values.")->configurable();
     app.add_flag_callback("--version",rpfbwt::Version::print,"Version number.");
     app.set_config("--configure");
     app.allow_windows_style_options();
@@ -54,11 +54,11 @@ int main(int argc, char **argv)
     
     // Set tmp dir for rle string
     if (not tmp_dir.empty()) { rle::TempFile::setDirectory(tmp_dir); }
-    
+
     // Build dictionaries and parse
     std::less<uint8_t> uint8_t_comp;
     pfpds::dictionary<uint8_t> l1_d(l1_prefix, w1, uint8_t_comp, true, true, true, true, false, true, false);
-    
+
     rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp l2_comp(l1_d, int_shift);
     pfpds::dictionary<uint32_t, rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp> l2_d(l1_prefix + ".parse", w2, l2_comp);
     pfpds::parse l2_p(l1_prefix + ".parse", l2_d.n_phrases() + 1);

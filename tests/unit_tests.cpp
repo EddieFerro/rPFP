@@ -63,6 +63,7 @@ void read_fasta_file(const char *filename, std::vector<char_type>& v, std::size_
 
 #include <pfp/pfp.hpp>
 #include <pfp/sa_support.hpp>
+#include <pfp/lce_support.hpp>
 
 #include <rpfbwt_algorithm.hpp>
 
@@ -134,15 +135,15 @@ TEST_CASE( "pfp<uint8_t> SA from example", "[small]" )
     uint32_t int_shift = 10;
     std::vector<std::vector<uint32_t>> dict_l2_prep =
     {
-    { 0, 6, 16}, // -
-    { 6, 16, 24, 10, 8, 19, 15, 22 , 3, 6, 16 }, // -
-    { 6, 16, 24, 12, 23, 14, 21, 2, 9 }, //
-    { 2, 9, 16, 18, 4, 19, 14, 17, 2, 9 }, //
-    { 2, 9, 11, 4, 19, 13,  6, 16 }, // -
-    { 6, 16, 25, 3, 6, 16 }, //
-    { 6, 16, 24, 16, 18, 8, 23, 15, 22, 2, 9 }, //
-    { 2, 9, 12, 19, 13, 7, 3, 6, 16 }, // -
-    { 6, 16, 24, 16, 20, 8, 23, 13, 7, 3, 5, 11, 4, 19, 15, 22, 1 } //
+    { 0, 6, 16}, // - 0
+    { 6, 16, 24, 10, 8, 19, 15, 22 , 3, 6, 16 }, // - 1
+    { 6, 16, 24, 12, 23, 14, 21, 2, 9 }, // - 2
+    { 2, 9, 16, 18, 4, 19, 14, 17, 2, 9 }, // - 3
+    { 2, 9, 11, 4, 19, 13,  6, 16 }, // - 4
+    { 6, 16, 25, 3, 6, 16 }, // - 5
+    { 6, 16, 24, 16, 18, 8, 23, 15, 22, 2, 9 }, // - 6
+    { 2, 9, 12, 19, 13, 7, 3, 6, 16 }, // - 7
+    { 6, 16, 24, 16, 20, 8, 23, 13, 7, 3, 5, 11, 4, 19, 15, 22, 1 } // - 8
     };
     for (auto& v : dict_l2_prep) { for (auto& e : v) { e += int_shift + 1; } }
     dict_l2_prep[0].insert(dict_l2_prep[0].begin(), w_l2, Dollar);
@@ -178,7 +179,7 @@ TEST_CASE( "pfp<uint8_t> SA from example", "[small]" )
     pfpds::pf_parsing<uint32_t, rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp, pfpds::pfp_wt_sdsl> l2_pfp(l2_d, l2_p, true, true);
 
     std::size_t chunks = 5;
-    std::size_t threads = 12;
+    std::size_t threads = 12; //12
     rpfbwt::rpfbwt_algo<uint8_t> rpfbwt_algo("mem", l1_d, l2_pfp, int_shift, chunks);
     rpfbwt_algo.l1_refined_rindex(threads);
 
@@ -204,6 +205,7 @@ TEST_CASE( "pfp<uint8_t> SA from example", "[small]" )
     pfpds::parse parsing(parse_l1_copy, dictionary.n_phrases() + 1);
     pfpds::pf_parsing<uint8_t> pfp(dictionary, parsing, true, true);
     pfpds::pfp_sa_support<uint8_t> sa_support(pfp);
+    pfpds::pfp_lce_support<uint8_t> lce_support(pfp);
 
     std::vector<std::size_t> sa_values;
     std::ifstream sa_values_is("mem.ssa");

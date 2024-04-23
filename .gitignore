@@ -31,7 +31,12 @@
 *.out
 *.app
 
+# IDE
+.idea
+
 # Other
+/debug/
+/build/
 /cmake-build-debug/
 /cmake-build-relwithdebinfo/
 /cmake-build-debug-local
