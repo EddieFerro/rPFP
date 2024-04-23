@@ -1,12 +1,12 @@
-# `r-pfbwt`
+# `rPFP`
 
-[![CMake](https://github.com/marco-oliva/r-pfbwt/actions/workflows/cmake.yml/badge.svg)](https://github.com/marco-oliva/r-pfbwt/actions/workflows/cmake.yml)
+This repository is the current and maintained version of Recursive PFP from https://github.com/marco-oliva/r-pfbwt. That repository is now depreceated. Any issues should be posted here.
 
-`r-pfbwt` is a tool to build the run-length encoded *BWT* and the *SA* values at the run heads from the prefix-free 
+`rPFP` is a tool to build the run-length encoded *BWT* and the *SA* values at the run heads from the prefix-free 
 parsing of the input data.
 
 ## Docker
-`r-pfbwt` is available on docker:
+`rPFP` is available on docker:
 
 ```bash
 docker pull moliva3/r-pfbwt:latest
@@ -20,19 +20,19 @@ singularity pull rpfbwt_sif docker://moliva3/r-pfbwt:latest
 ```
 
 ## Build
-`r-pfbwt` can be built using: 
+`rPFP` can be built using: 
 
 ```shell
-git clone https://github.com/marco-oliva/r-pfbwt.git
-cd r-pfbwt
+git clone git@github.com:EddieFerro/rPFP.git
+cd rPFP
 mkdir build && cd build
 cmake ..
 make -j
 ```
  
-## How to use `r-pfbwt`
-`r-pfbwt` takes as input the prefix-free parse of the input data, namely a dictionary *D<sub>1</sub>* and a parse *P<sub>1</sub>*, and 
-the dictionary *D<sub>2</sub>* and the parse *P<sub>2</sub>* obtained by prefix-free parsing *P<sub>1</sub>*. Note that `r-pfbwt` does not use *P<sub>1</sub>*,
+## How to use `rPFP`
+`rPFP` takes as input the prefix-free parse of the input data, namely a dictionary *D<sub>1</sub>* and a parse *P<sub>1</sub>*, and 
+the dictionary *D<sub>2</sub>* and the parse *P<sub>2</sub>* obtained by prefix-free parsing *P<sub>1</sub>*. Note that `rPFP` does not use *P<sub>1</sub>*,
 it only uses *D<sub>1</sub>*, *D<sub>2</sub>* and *P<sub>2</sub>*. In order to compute the prefix-free parsing of the input data we can use `pfp++`
 ([link here](https://github.com/marco-oliva/pfp.git)). The following example computes the run-length encoded *BWT* of multiple
 sequences of yeast.
@@ -46,7 +46,7 @@ rpfbwt  --l1-prefix yeast.fasta --w1 10 --w2 5 --threads 10
 
 
 ## Usage
-We report here all the available parameters for `r-pfbwt`
+We report here all the available parameters for `rPFP`
 
 ```shell
 rpfbwt
@@ -65,32 +65,4 @@ Options:
   --bwt-only                  Only compute the RLBWT. No SA values.
   --version                   Version number.
   --configure                 Read an ini file
-```
-
-## Citation
-
-Please, if you use this tool in an academic setting cite the following papers:
-
-```
-@article{oliva2023recursiveBWT,
-  title={Recursive Prefix-Free Parsing for Building Big BWTs},
-  author={Oliva, Marco and Gagie, Travis and Boucher, Christina},
-  journal={bioRxiv},
-  pages={2023--01},
-  year={2023},
-  publisher={Cold Spring Harbor Laboratory},
-  doi = {10.1101/2023.01.18.524557}
-}
-```
-
-```
-@article {oliva2023recursiveRI,
-    title = {Building a Pangenome Alignment Index via Recursive Prefix-Free Parsing},
-    author={Oliva, Marco and Gagie, Travis and Boucher, Christina},
-    journal={bioRxiv},
-    pages={2023--01},
-    year={2023},
-    publisher={Cold Spring Harbor Laboratory}
-    doi = {10.1101/2023.01.26.525723},
-}
 ```
