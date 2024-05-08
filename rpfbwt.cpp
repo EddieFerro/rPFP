@@ -57,11 +57,11 @@ int main(int argc, char **argv)
 
     // Build dictionaries and parse
     std::less<uint8_t> uint8_t_comp;
-    pfpds::dictionary<uint8_t> l1_d(l1_prefix, w1, uint8_t_comp, true, true, true, true, false, true, false);
+    pfpds::dictionary<uint8_t> l1_d(l1_prefix, w1, uint8_t_comp);
 
     rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp l2_comp(l1_d, int_shift);
     pfpds::dictionary<uint32_t, rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp> l2_d(l1_prefix + ".parse", w2, l2_comp);
-    pfpds::parse l2_p(l1_prefix + ".parse", l2_d.n_phrases() + 1);
+    pfpds::parse l2_p(l1_prefix + ".parse", l2_d.n_phrases() + 1, true, true, true, true);
     pfpds::pf_parsing<uint32_t, rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp, pfpds::pfp_wt_sdsl> l2_pfp(l2_d, l2_p, false, true);
     
     rpfbwt::rpfbwt_algo<uint8_t> rpfbwt_algo(l1_prefix, l1_d, l2_pfp, int_shift, chunks);

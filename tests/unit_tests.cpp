@@ -261,10 +261,10 @@ TEST_CASE( "Compare r-index with PFP-DS", "[yeast]" )
     // Build the ri
     std::size_t chunks = 5;
     std::size_t threads = 12;
-    pfpds::dictionary<uint8_t> l1_d_copy(yeast_pfp_path, w_l1, uint8_t_comp, true, true, true, true, false, true, false);
+    pfpds::dictionary<uint8_t> l1_d_copy(yeast_pfp_path, w_l1, uint8_t_comp);
     rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp l2_comp(l1_d_copy, int_shift);
     pfpds::dictionary<uint32_t, rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp> l2_d(yeast_pfp_path + ".parse", w_l2, l2_comp);
-    pfpds::parse l2_p(yeast_pfp_path + ".parse", l2_d.n_phrases() + 1);
+    pfpds::parse l2_p(yeast_pfp_path + ".parse", l2_d.n_phrases() + 1, true, true, true, true);
     pfpds::pf_parsing<uint32_t, rpfbwt::rpfbwt_algo<uint8_t, uint32_t>::l2_colex_comp, pfpds::pfp_wt_sdsl> l2_pfp(l2_d, l2_p, false, true);
     rpfbwt::rpfbwt_algo<uint8_t> rpfbwt_algo(yeast_pfp_path, l1_d_copy, l2_pfp, int_shift, chunks);
     rpfbwt_algo.l1_refined_rindex(threads);
