@@ -38,7 +38,7 @@ it only uses *D<sub>1</sub>*, *D<sub>2</sub>* and *P<sub>2</sub>*. In order to c
 sequences of yeast.
 
 ```shell
-wget https://gitlab.com/manzai/Big-BWT/-/blob/f67022fe74dae0234e516324103613a0fdd58a6e/yeast.fasta -O ./yeast.fasta
+wget https://gitlab.com/manzai/Big-BWT/-/raw/f67022fe74dae0234e516324103613a0fdd58a6e/yeast.fasta?inline=false -O ./yeast.fasta
 pfp++ -f yeast.fasta -w 10 -p 100 --output-occurrences 
 pfp++ -i yeast.fasta.parse -w 5 -p 11 
 rpfbwt  --l1-prefix yeast.fasta --w1 10 --w2 5 --threads 10
